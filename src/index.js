@@ -1,17 +1,46 @@
-import React from 'react';
+//import React from 'react';
 import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+
+// className="room" is for CSS
+
+// This is the alternate arrangement done in class. Both can be used.
+// Also, instead of Room() function inside index.js, a separate file can be made Room.js
+// and then called inside the ReactDOM.render like we have done for previous examples.
+function Room(){
+  const [isLit, setLit] = useState(false);
+  const brightness = isLit ? "lit" : "dark";
+
+  function updateLit(){
+      alert('Button pressed');
+      setLit(!isLit);
+  }  
+return(
+  <div className={`room ${brightness}`}>The room is {isLit ? "Lit" : "Dark"}
+    <br />
+    <button onClick={updateLit}>Toggle Button</button>
+  </div>
+);
+}
+
+// This is the original implementation for the Room light toggle
+/*
+function Room(){
+    const [isLit, setLit] = useState(false);
+    const brightness = isLit ? "lit" : "dark";
+return(
+    <div className={`room ${brightness}`}>The room is {isLit ? "Lit" : "Dark"}
+    <br />
+    <button onClick={() => setLit(!isLit)}>
+      Toggle Button
+    </button>
+    </div>
+);
+}
+*/
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Room />,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
